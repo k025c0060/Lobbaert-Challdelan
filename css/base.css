@@ -4,6 +4,52 @@ html {
     text-align: center;
 }
 
+.font1 {
+    font-family: "Cormorant Garamond", serif;
+    font-optical-sizing: auto;
+    font-weight: 200;
+    font-style: normal;
+}
+.font2 {
+    font-family: "Cinzel", serif;
+    font-optical-sizing: auto;
+    font-weight: 200;
+    font-style: normal;
+}
+.ja_font {
+    font-family: "Shippori Mincho", serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
 .main { 
     display: none;
+}
+
+.head img {
+    width: 150px;
+}
+.head {
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+    padding: 20px;
+}
+.head_a {
+    font-size: 30px;
+    margin-right: 10px;
+}
+.head_a a {
+    color: rgb(181, 186, 190);
+}
+
+.contents img {
+    width: 400px;
+}
+.contents {
+    margin: auto;
+    width: 90%;
+}
+.contents table {
+    margin: auto;
 }
