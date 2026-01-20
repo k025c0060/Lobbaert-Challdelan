@@ -1,0 +1,9 @@
+html {
+    background-color: black;
+    color: rgb(181, 186, 190);
+    text-align: center;
+}
+
+.main { 
+    display: none;
+}
