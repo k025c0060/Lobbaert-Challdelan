@@ -1,0 +1,96 @@
+/* --- ここから下を書き換え・追加してください --- */
+
+/* ノイズ全体のコンテナ（画面全体） */
+.scanline-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 9999;
+  pointer-events: none;
+  overflow: hidden;
+
+  /* 四隅を暗くする */
+  background: radial-gradient(
+    circle, 
+    rgba(0,0,0,0.2) 50%, 
+    rgba(0,0,0,0.6) 100%
+  );
+
+  /* ★追加：画面全体を時々ゆらゆら歪ませる */
+  animation: screen-wobble 0.2s infinite;
+}
+
+/* 1. 砂嵐ノイズ（激しく明滅・変化させる） */
+.scanline-overlay::before {
+  content: "";
+  position: absolute;
+  top: -100%;
+  left: -100%;
+  width: 300%;
+  height: 300%;
+  opacity: 0.15; /* 濃さを少しアップ */
+  
+  /* SVGノイズ画像 */
+  background-image: url('data:image/svg+xml;utf8,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="noise"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23noise)"/%3E%3C/svg%3E');
+  
+  /* ★変更：stepsを使って、位置をランダムに「瞬間移動」させる */
+  /* これにより、揺れているようなザラザラ感が生まれます */
+  animation: static-noise 0.5s steps(10) infinite;
+}
+
+/* 2. 走査線（横線） */
+.scanline-overlay::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.1;
+  
+  /* 横縞 */
+  background: repeating-linear-gradient(
+    to bottom,
+    transparent 0px,
+    transparent 2px,
+    #000 3px,
+    #000 4px
+  );
+  
+  /* 走査線をゆっくり動かす */
+  animation: scanline-scroll 10s linear infinite;
+}
+
+/* --- アニメーション定義（ここがキモです） --- */
+
+/* 砂嵐を「パラパラ漫画」のように激しく切り替える */
+@keyframes static-noise {
+  0% { transform: translate(0, 0); }
+  10% { transform: translate(-10%, 10%); }
+  20% { transform: translate(10%, -5%); }
+  30% { transform: translate(-20%, 5%); }
+  40% { transform: translate(10%, 15%); }
+  50% { transform: translate(-15%, -10%); }
+  60% { transform: translate(15%, 5%); }
+  70% { transform: translate(-5%, 20%); }
+  80% { transform: translate(5%, -15%); }
+  90% { transform: translate(-20%, 10%); }
+  100% { transform: translate(0, 0); }
+}
+
+/* 画面全体を接触不良のように微妙に歪ませる */
+@keyframes screen-wobble {
+  0% { transform: skewX(0deg) scale(1); }
+  20% { transform: skewX(1deg) scale(1.002); } /* ほんの少し歪む */
+  40% { transform: skewX(-1deg) scale(1); }
+  60% { transform: skewX(0.5deg) scale(1.001); }
+  80% { transform: skewX(-0.5deg) scale(1); }
+  100% { transform: skewX(0deg) scale(1); }
+}
+
+@keyframes scanline-scroll {
+  0% { background-position: 0 0; }
+  100% { background-position: 0 100vh; }
+}

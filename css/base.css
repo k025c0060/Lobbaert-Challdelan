@@ -53,3 +53,11 @@ html {
 .contents table {
     margin: auto;
 }
+
+.jointext {
+    color: rgb(181, 186, 190);
+    transition: color 1s;
+    &:hover {
+        color: white;
+    }
+}

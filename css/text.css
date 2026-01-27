@@ -1,0 +1,9 @@
+/* text.css */
+.greet span {
+  display: block;
+  visibility: hidden; /* これだけ残す（JS読み込み前のチラつき防止） */
+  margin: 16px 0;
+  font-size: 20px;
+  /* opacity: 0;  ← 削除（JSで制御するため） */
+  /* transform: ...; ← 削除 */
+}

@@ -1,0 +1,14 @@
+.wrap {
+  margin: 0 auto;
+}
+
+.wrap .parallax-image {
+  height: 50vw;
+  overflow: hidden;
+  width: 100%;
+}
+
+img {
+  height: auto;
+  width: 100%;
+}
